@@ -1,0 +1,25 @@
+<h1>What is BMI?</h1>
+<p>The body mass index (BMI), or Quetelet index, is a measure for human body shape based on an individual's mass and height.</p>
+<p>The BMI is used in a wide variety of contexts as a simple method to assess how much an individual's body weight departs from what is normal or desirable for a person of his or her height.</p>
+
+<h1>Why BMI is important?</h1>
+<p>The body mass index, or BMI, is a calculation used to determine your level of body fat. It can help a doctor determine your overall fitness and your risk of developing chronic diseases.</p>
+<div class='liveExample'>   
+    <p>First name: <input data-bind='value: firstName' /></p> 
+    <p>Last name: <input data-bind='value: lastName' /></p> 
+    <h2>Hello, <span data-bind='text: fullName'> </span>!</h2>  
+</div>
+<script type="text/javascript">
+// Here's my data model
+var ViewModel = function(first, last) {
+    this.firstName = ko.observable(first);
+    this.lastName = ko.observable(last);
+ 
+    this.fullName = ko.computed(function() {
+        // Knockout tracks dependencies automatically. It knows that fullName depends on firstName and lastName, because these get called when evaluating fullName.
+        return this.firstName() + " " + this.lastName();
+    }, this);
+};
+ 
+ko.applyBindings(new ViewModel("Planet", "Earth")); // This makes Knockout get to work
+</script>

@@ -4,22 +4,38 @@
 
 <h1>Why BMI is important?</h1>
 <p>The body mass index, or BMI, is a calculation used to determine your level of body fat. It can help a doctor determine your overall fitness and your risk of developing chronic diseases.</p>
-<div class='liveExample'>   
-    <p>First name: <input data-bind='value: firstName' /></p> 
-    <p>Last name: <input data-bind='value: lastName' /></p> 
-    <h2>Hello, <span data-bind='text: fullName'> </span>!</h2>  
+
+<div class='form_input'>   
+    <label for="first_name_input">First name:</label><input type="text" class="form-control" name="first_name_input" data-bind='value: firstName' title="asdd" placeholder="Your first name"/>
+    <label for="last_name_input">Last name:</label><input type="text" class="form-control" name="last_name_input" placeholder="Your last name" data-bind='value: lastName' />
+    <label for="age_input">Age:</label><input type="number" class="form-control" name="age_input" min="1" max="100" value="20"/>
+    <label for="gender_input">Gender:</label>
+    <select class="select-block mbl">
+      <option value="male">Male</option>
+      <option value="female">Female</option>
+    </select>
+
+    <label for="measure_type">Type Measurement:</label>
+    <div class="switch" data-on-label="Met." data-off-label="Imp."><input type="checkbox" name="measure_type" ></div>
+    <div class="form-group">
+      <label for="weight_input">Your Weight:</label>
+      <div class="input-group"><input type="number" class="form-control" name="weight_input" min="1" max="220" value="0"/><span class="input-group-addon">Pounds</span></div>
+    </div>
+    <div class="form-group">
+      <label for="height_input">Your Height:</label>
+      <div class="input-group"><input type="number" class="form-control" name="height_input" min="1" max="220" value="0"/><span class="input-group-addon">Inches</span></div>
+    </div>
+<button type="button" id="example" class="btn btn-default" data-toggle="tooltip" data-placement="top" title="Tooltip on left">Tooltip on left</button>
+
+    <h2>Hello, <span data-bind='text: fullName'></span>!</h2>  
 </div>
+
+<!-- Javascript additional -->
+<%= javascript_include_tag "bmi_formula" %>
 <script type="text/javascript">
-// Here's my data model
-var ViewModel = function(first, last) {
-    this.firstName = ko.observable(first);
-    this.lastName = ko.observable(last);
- 
-    this.fullName = ko.computed(function() {
-        // Knockout tracks dependencies automatically. It knows that fullName depends on firstName and lastName, because these get called when evaluating fullName.
-        return this.firstName() + " " + this.lastName();
-    }, this);
-};
- 
-ko.applyBindings(new ViewModel("Planet", "Earth")); // This makes Knockout get to work
+$('[data-toggle="tooltip"]').tooltip();
+
+$("select").selectpicker({style: 'btn-hg btn-primary', menuStyle: 'dropdown-inverse'});
+ // $(':checkbox').checkbox();
+ $(':radio').radio();
 </script>

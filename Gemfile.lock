@@ -123,7 +123,7 @@ DEPENDENCIES
   jquery-rails
   knockoutjs-rails
   rails (= 4.0.3)
-  sass-rails (~> 4.0.0)
+  sass-rails (>= 3.2)
   sdoc
   sqlite3
   turbolinks

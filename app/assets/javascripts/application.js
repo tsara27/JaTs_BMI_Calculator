@@ -11,18 +11,20 @@
 // about supported directives.
 //
 //= require turbolinks
-//= require knockout
-//= require jquery-1.8.3.min
+//= require jquery-2.1.0.min
 //= require jquery_ujs
 //= require jquery-ui-1.10.3.custom.min
 //= require jquery.ui.touch-punch.min
+//= require knockout
 //= require bootstrap.min
 //= require bootstrap-select
 //= require bootstrap-switch
 //= require flatui-checkbox
-//= require flatui-radio
 //= require jquery.tagsinput
 //= require jquery.placeholder
+//= require jquery.numeric
+
+
 
 
 

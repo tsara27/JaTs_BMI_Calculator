@@ -8,7 +8,7 @@
 <div class='form_input'>   
     <label for="first_name_input">First name:</label><input type="text" class="form-control" name="first_name_input" data-bind='value: firstName' title="asdd" placeholder="Your first name"/>
     <label for="last_name_input">Last name:</label><input type="text" class="form-control" name="last_name_input" placeholder="Your last name" data-bind='value: lastName' />
-    <label for="age_input">Age:</label><input type="number" class="form-control" name="age_input" min="1" max="100" value="20"/>
+    <label for="age_input">Age:</label><input type="number" class="form-control numeric" name="age_input" min="1" max="100" value="20"/>
     <label for="gender_input">Gender:</label>
     <select class="select-block mbl">
       <option value="male">Male</option>
@@ -16,14 +16,20 @@
     </select>
 
     <label for="measure_type">Type Measurement:</label>
-    <div class="switch" data-on-label="Met." data-off-label="Imp."><input type="checkbox" name="measure_type" ></div>
+      <input type="radio" name="measure_type" value="Metric" data-bind="checked: booleanValue">Metric 
+      <input type="radio" name="measure_type" value="Imperial" data-bind="checked: booleanValue">
+      Imperial
     <div class="form-group">
       <label for="weight_input">Your Weight:</label>
-      <div class="input-group"><input type="number" class="form-control" name="weight_input" min="1" max="220" value="0"/><span class="input-group-addon">Pounds</span></div>
+      <div class="input-group">
+        <input type="number" class="form-control numeric" name="weight_input"data-bind="value: bodyWeight, attr: { min: minWeight, max: maxWeight }"/>
+        <span class="input-group-addon" data-bind='text: booleanValue() == "Metric" ? "Kilogram" : "Lbs"'></span></div>
     </div>
     <div class="form-group">
       <label for="height_input">Your Height:</label>
-      <div class="input-group"><input type="number" class="form-control" name="height_input" min="1" max="220" value="0"/><span class="input-group-addon">Inches</span></div>
+      <div class="input-group">
+        <input type="number" class="form-control numeric" name="height_input" min="1" max="250" step="0.1"data-bind="value: bodyHeight, attr: { min: minHeight, max: maxHeight }"/>
+        <span class="input-group-addon" data-bind='text: booleanValue() == "Metric" ? "Centimeter" : "Inches"'></span></div>
     </div>
 <button type="button" id="example" class="btn btn-default" data-toggle="tooltip" data-placement="top" title="Tooltip on left">Tooltip on left</button>
 
@@ -36,6 +42,5 @@
 $('[data-toggle="tooltip"]').tooltip();
 
 $("select").selectpicker({style: 'btn-hg btn-primary', menuStyle: 'dropdown-inverse'});
- // $(':checkbox').checkbox();
- $(':radio').radio();
+$("input.numeric").numeric();
 </script>

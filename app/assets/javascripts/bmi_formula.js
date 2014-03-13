@@ -1,7 +1,17 @@
 function Capitalize(string)
 {
-	return string.charAt(0).toUpperCase() + string.slice(1).toLowerCase()
+    return string.charAt(0).toUpperCase() + string.slice(1).toLowerCase()
 }
+
+function CalculationBMI(bodyWeight, bodyHeight, booleanValue)
+{
+        self = this.Calc; 
+        self = ko.computed(function() {
+            return bodyWeight/(Math.pow((bodyHeight/100),2));
+        }, this);
+ 
+}   
+
 function AppViewModel() {
     this.firstName = ko.observable("");
     this.lastName = ko.observable("");
@@ -34,6 +44,15 @@ function AppViewModel() {
     },this);
     this.fullName = ko.computed(function() {
     return Capitalize(this.firstName()) + " " + Capitalize(this.lastName());}, this);
+
+    this.resultBMI = ko.observable(" ( )");
+    this.hasil = ko.computed(function(){
+            return " "+(this.bodyWeight()/(Math.pow((this.bodyHeight()/100),2))).toFixed(2);
+        },this);
+    this.countBMI = function(){
+        this.resultBMI(this.hasil());
+    }
+    
 
 }
 

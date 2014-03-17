@@ -5,53 +5,118 @@
 <h1>Why BMI is important?</h1>
 <p>The body mass index, or BMI, is a calculation used to determine your level of body fat. It can help a doctor determine your overall fitness and your risk of developing chronic diseases.</p>
 
-<div class='form_input'>   
-    <label for="first_name_input">First name:</label><input type="text" class="form-control" name="first_name_input" data-bind='value: firstName' title="asdd" placeholder="Your first name"/>
-    <label for="last_name_input">Last name:</label><input type="text" class="form-control" name="last_name_input" placeholder="Your last name" data-bind='value: lastName' />
-    <label for="age_input">Age:</label><input type="number" class="form-control numeric" name="age_input" min="1" max="100" value="20"/>
-    <label for="gender_input">Gender:</label>
-    <select class="select-block mbl">
-      <option value="male">Male</option>
-      <option value="female">Female</option>
-    </select>
+<div class='form_input'>
+<form class="form-horizontal" role="form" action="#">
+  
+  <!-- First name -->
+  <div class="form-group">
+    <label for="first_name_input" class="col-sm-2 control-label">First name:</label>
+    <div class="col-sm-6">
+      <input type="text" class="form-control" name="first_name_input" data-bind='value: firstName, valueUpdate:"input"' placeholder="Your first name" />
+    </div>
+    <div class="col-sm-4" data-bind="validationMessage: firstName"></div>
+  </div>
+  
 
-    <label for="measure_type">Type Measurement:</label>
-      <input type="radio" name="measure_type" value="Metric" data-bind="checked: booleanValue">Metric 
-      <input type="radio" name="measure_type" value="Imperial" data-bind="checked: booleanValue">
-      Imperial
+  <!-- Last name -->
+  <div class="form-group">
+    <label for="last_name_input" class="col-sm-2 control-label">Last name:</label>
+    <div class="col-sm-6">
+      <input type="text" class="form-control" name="last_name_input" placeholder="Your last name" data-bind='value: lastName, valueUpdate:"input"' />
+    </div>
+    <div class="col-sm-4" data-bind="validationMessage: lastName"></div>
+  </div>  
+  
+  <!-- His/her age -->
+  <div class="form-group">
+    <label for="age_input" class="col-sm-2 control-label">Age:</label>
+    <div class="col-sm-6">
+      <input type="number" class="form-control numeric" name="age_input" data-bind="value: agePerson, valueUpdate: 'input', attr: { min: minAge, max: maxAge }"/>
+    </div>
+  </div>
+  
+  <!-- Gender -->
+  <div class="form-group">
+    <label for="gender_input" class="col-sm-2 control-label">Gender:</label>
+    <div class="col-sm-6">
+      <select class="select-block mbl">
+        s<option value="male">Male</option>
+        <option value="female">Female</option>
+      </select>
+    </div>
+  </div>
     
-      <!--  Metric Measurement-->
-      <div class="form-group">
-        <label for="weight_input">Your Weight:</label>
-        <div class="input-group">
-          <input type="number" class="form-control numeric" name="weight_input"data-bind="value: weightMetric, attr: { min: minWeightM, max: maxWeightM }"/>
-          <span class="input-group-addon">Kilograms</span></div>
-      </div>
-      <div class="form-group">
-        <label for="height_input">Your Height:</label>
-        <div class="input-group">
-          <input type="number" class="form-control numeric" name="height_input" min="1" max="250" step="0.1"data-bind="value: heightMetric, attr: { min: minHeightM, max: maxHeightM }"/>
-          <span class="input-group-addon"</span>Centimeters</div>
-      </div>
+  <!-- Type of measurement -->
+  <div class="form-group">
+    <label for="measure_type" class="col-sm-2 control-label">Type Measurement:</label>
+    <div class="col-sm-2">
+      <label class="radio-inline">
+        <input type="radio" name="measure_type" value="Metric" data-bind="checked: booleanValue"> Metric
+      </label>
+    </div>
+    <div class="col-sm-2">
+      <label class="radio-inline">
+        <input type="radio" name="measure_type" value="Imperial" data-bind="checked: booleanValue"> Imperial
+      </label>
+    </div> 
+  </div>
+  
+  <!--  Metric Measurement -->
+  <!-- Metric Weight -->
+  <div class="form-group">
+    <label for="weight_input" class="col-sm-2 control-label">Your Weight:</label>
+    <div class="col-sm-6">
+      <div class="input-group">
+      <input type="number" class="form-control numeric" name="weight_input"data-bind="value: weightMetric, attr: { min: minWeightM, max: maxWeightM }"/>
+      <span class="input-group-addon">Kilograms</span>
+    </div>
+    </div>
+  </div>
 
-      <!--  Imperial Measurement-->
-      <div class="form-group">
-        <label for="weight_input">Your Weight:</label>
-        <div class="input-group">
-          <input type="number" class="form-control numeric" name="weight_input"data-bind="value: weightImperial, attr: { min: minWeightI, max: maxWeightI }"/>
-          <span class="input-group-addon">Lbs</span></div>
-      </div>
-      <div class="form-group">
-        <label for="height_input">Your Height:</label>
-        <div class="input-group">
-          <input type="number" class="form-control numeric" name="height_input" min="1" max="250" step="0.1"data-bind="value: heightImperial, attr: { min: minHeightI, max: maxHeightI }"/>
-          <span class="input-group-addon"</span>Inches</div>
-      </div>
-    
-<button class="btn btn-embossed btn-primary" data-toggle="tooltip" data-placement="top" title="Prepare yourself" data-bind="click: countBMI">Show My BMI!</button>
-    <h2><span data-bind='text: fullName'></span></h2> 
-    <h3>Your BMI is<span data-bind='text: resultBMI'></span></h3>  
+  <!-- Metric Height -->
+  <div class="form-group">
+    <label for="height_input" class="col-sm-2 control-label">Your Height:</label>
+    <div class="col-sm-6">
+    <div class="input-group">
+      <input type="number" class="form-control numeric" name="height_input" min="1" max="250" step="0.1"data-bind="value: heightMetric, attr: { min: minHeightM, max: maxHeightM }"/>
+      <span class="input-group-addon">Centimeters</span>
+    </div>
+    </div>
+  </div>
 
+  <!--  Imperial Measurement-->
+  <!-- Imperial Weight -->
+  <div class="form-group">
+    <label for="weight_input" class="col-sm-2 control-label">Your Weight:</label>
+    <div class="col-sm-6">
+    <div class="input-group">
+      <input type="number" class="form-control numeric" name="weight_input"data-bind="value: weightImperial, attr: { min: minWeightI, max: maxWeightI }"/>
+      <span class="input-group-addon">Lbs</span>
+    </div>
+    </div>
+  </div>
+
+  <!-- Imperial Height -->
+  <div class="form-group">
+    <label for="height_input" class="col-sm-2 control-label">Your Height:</label>
+    <div class="col-sm-6">
+      <div class="input-group">
+      <input type="number" class="form-control numeric" name="height_input" min="1" max="250" step="0.1"data-bind="value: heightImperial, attr: { min: minHeightI, max: maxHeightI }"/>
+      <span class="input-group-addon">Inches</span>
+    </div>
+    </div>
+  </div>
+</form>
+
+  <!--  Submit button -->
+  <div class="form-group">
+    <div class="col-sm-offset-2 col-sm-6">
+      <button class="btn btn-embossed btn-primary" data-toggle="tooltip" data-placement="top" title="Prepare yourself" data-bind="click: countBMI">Show My BMI!</button>
+    </div>
+  </div>
+
+    <br><h2><span data-bind='text: fullName'></span></h2> 
+    <br><h3><span data-bind='text: resultBMI'></span></h3>  
 </div>
 
 <!-- Javascript additional -->

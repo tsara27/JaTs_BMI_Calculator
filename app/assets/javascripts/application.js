@@ -13,6 +13,7 @@
 //= require turbolinks
 //= require jquery-2.1.0.min
 //= require jquery_ujs
+//= require kendo.dataviz.min
 //= require jquery-ui-1.10.3.custom.min
 //= require jquery.ui.touch-punch.min
 //= require knockout

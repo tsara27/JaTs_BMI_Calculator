@@ -118,6 +118,24 @@
     <br><h2><span data-bind='text: fullName'></span></h2> 
     <br><h3><span data-bind='text: resultBMI'></span></h3>  
 </div>
+<div id="gauge-container">
+    <div id="gauge"></div>
+</div>
+<style scoped>
+    #gauge-container {
+        background: transparent url("assets/gauge-container.png") no-repeat 50% 50%;
+        width: 404px;
+        height: 404px;
+        text-align: center;
+        margin: 0 0 30px 50px;
+    }
+
+    #gauge {
+        width: 330px;
+        height: 330px;
+        margin: 0 auto 0;
+    }
+</style>
 
 <!-- Javascript additional -->
 <%= javascript_include_tag "bmi_formula" %>

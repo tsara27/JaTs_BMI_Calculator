@@ -40,10 +40,10 @@ function AppViewModel() {
 
     this.booleanValue = ko.observable('Metric');
     this.agePerson = ko.observable(20);
-    this.weightMetric = ko.observable();
-    this.weightImperial = ko.observable();
-    this.heightImperial = ko.observable();
-    this.heightMetric = ko.observable();
+    this.weightMetric = ko.observable(0);
+    this.weightImperial = ko.observable(0);
+    this.heightImperial = ko.observable(0);
+    this.heightMetric = ko.observable(0);
     
     calcHImp = ko.computed(function() {
         a = (this.heightMetric() * 0.393701).toFixed(2);
@@ -151,6 +151,43 @@ function AppViewModel() {
             alert('Please check your submission.');
         }
     }
+
+    function createGauge(labelPosition) {
+    $("#gauge").kendoRadialGauge({
+
+        pointer: {
+            value: 65
+        },
+
+        scale: {
+            minorUnit: 5,
+            startAngle: -30,
+            endAngle: 210,
+            max: 180,
+            labels: {
+                position: labelPosition || "inside"
+            },
+            ranges: [
+                {
+                    from: 80,
+                    to: 120,
+                    color: "#ffc700"
+                }, {
+                    from: 120,
+                    to: 150,
+                    color: "#ff7a00"
+                }, {
+                    from: 150,
+                    to: 180,
+                    color: "#c20000"
+                }
+            ]
+        }
+    });
+}
+$(document).ready(function() {
+    createGauge();
+});
 }
 
 ko.applyBindings(new AppViewModel());

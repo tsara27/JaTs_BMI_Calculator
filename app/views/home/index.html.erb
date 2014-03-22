@@ -33,6 +33,7 @@
     <div class="col-sm-6">
       <input type="number" class="form-control numeric" name="age_input" data-bind="value: agePerson, valueUpdate: 'input', attr: { min: minAge, max: maxAge }"/>
     </div>
+     <div class="col-sm-4" data-bind="validationMessage: agePerson"></div>
   </div>
   
   <!-- Gender -->
@@ -67,21 +68,23 @@
     <label for="weight_input" class="col-sm-2 control-label">Your Weight:</label>
     <div class="col-sm-6">
       <div class="input-group">
-      <input type="number" class="form-control numeric" name="weight_input"data-bind="value: weightMetric, attr: { min: minWeightM, max: maxWeightM }"/>
-      <span class="input-group-addon">Kilograms</span>
+        <input type="number" class="form-control numeric" name="weight_input"data-bind="value: weightMetric, attr: { min: minWeightM, max: maxWeightM }"/>
+        <span class="input-group-addon">Kilograms</span>
+      </div>
     </div>
-    </div>
+     <div class="col-sm-4" data-bind="validationMessage: weightMetric"></div>
   </div>
 
   <!-- Metric Height -->
   <div class="form-group">
     <label for="height_input" class="col-sm-2 control-label">Your Height:</label>
     <div class="col-sm-6">
-    <div class="input-group">
-      <input type="number" class="form-control numeric" name="height_input" min="1" max="250" step="0.1"data-bind="value: heightMetric, attr: { min: minHeightM, max: maxHeightM }"/>
-      <span class="input-group-addon">Centimeters</span>
+      <div class="input-group">
+        <input type="number" class="form-control numeric" name="height_input" min="1" max="250" step="0.1"data-bind="value: heightMetric, attr: { min: minHeightM, max: maxHeightM }"/>
+        <span class="input-group-addon">Centimeters</span>
+      </div>
     </div>
-    </div>
+     <div class="col-sm-4" data-bind="validationMessage: heightMetric"></div>
   </div>
 
   <!--  Imperial Measurement-->
@@ -89,22 +92,24 @@
   <div class="form-group">
     <label for="weight_input" class="col-sm-2 control-label">Your Weight:</label>
     <div class="col-sm-6">
-    <div class="input-group">
-      <input type="number" class="form-control numeric" name="weight_input"data-bind="value: weightImperial, attr: { min: minWeightI, max: maxWeightI }"/>
-      <span class="input-group-addon">Lbs</span>
+      <div class="input-group">
+        <input type="number" class="form-control numeric" name="weight_input"data-bind="value: weightImperial, attr: { min: minWeightI, max: maxWeightI }"/>
+        <span class="input-group-addon">Lbs</span>
+      </div>
     </div>
-    </div>
+     <div class="col-sm-4" data-bind="validationMessage: weightImperial"></div>
   </div>
 
   <!-- Imperial Height -->
   <div class="form-group">
     <label for="height_input" class="col-sm-2 control-label">Your Height:</label>
     <div class="col-sm-6">
-      <div class="input-group">
-      <input type="number" class="form-control numeric" name="height_input" min="1" max="250" step="0.1"data-bind="value: heightImperial, attr: { min: minHeightI, max: maxHeightI }"/>
-      <span class="input-group-addon">Inches</span>
+        <div class="input-group">
+          <input type="number" class="form-control numeric" name="height_input" min="1" max="250" step="0.1"data-bind="value: heightImperial, attr: { min: minHeightI, max: maxHeightI }"/>
+          <span class="input-group-addon">Inches</span>
+      </div>
     </div>
-    </div>
+     <div class="col-sm-4" data-bind="validationMessage: heightImperial"></div>
   </div>
 </form>
 
@@ -114,34 +119,11 @@
       <button class="btn btn-embossed btn-primary" data-toggle="tooltip" data-placement="top" title="Prepare yourself" data-bind="click: countBMI">Show My BMI!</button>
     </div>
   </div>
-
     <br><h2><span data-bind='text: fullName'></span></h2> 
     <br><h3><span data-bind='text: resultBMI'></span></h3>  
+    <br><h3><span data-bind='text: WN'></span></h3>
+    <br><p data-bind='text: waterSuggestion'></p>    
 </div>
-<div id="gauge-container">
-    <div id="gauge"></div>
-</div>
-<style scoped>
-    #gauge-container {
-        background: transparent url("assets/gauge-container.png") no-repeat 50% 50%;
-        width: 404px;
-        height: 404px;
-        text-align: center;
-        margin: 0 0 30px 50px;
-    }
-
-    #gauge {
-        width: 330px;
-        height: 330px;
-        margin: 0 auto 0;
-    }
-</style>
 
 <!-- Javascript additional -->
-<%= javascript_include_tag "bmi_formula" %>
-<script type="text/javascript">
-$('[data-toggle="tooltip"]').tooltip();
-
-$("select").selectpicker({style: 'btn-hg btn-primary', menuStyle: 'dropdown-inverse'});
-$("input.numeric").numeric();
-</script>
+<%= javascript_include_tag "bmi_formula", "data-turbolinks-track" => true %>

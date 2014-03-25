@@ -40,10 +40,7 @@
   <div class="form-group">
     <label for="gender_input" class="col-sm-2 control-label">Gender:</label>
     <div class="col-sm-6">
-      <select class="select-block mbl">
-        s<option value="male">Male</option>
-        <option value="female">Female</option>
-      </select>
+      <select class="select-block mbl" name="gender_input" data-bind="options: genders, selectedOptions: chosenGender"></select>
     </div>
   </div>
     
@@ -120,7 +117,8 @@
     </div>
   </div>
     <br><h2><span data-bind='text: fullName'></span></h2> 
-    <br><h3><span data-bind='text: resultBMI'></span></h3>  
+    <br><h3><span data-bind='text: resultBMI'></span><span data-bind="text: WeightType"></span>
+</h3>  
     <br><h3><span data-bind='text: WN'></span></h3>
     <br><p data-bind='text: waterSuggestion'></p>    
 </div>

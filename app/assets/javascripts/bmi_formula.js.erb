@@ -19,6 +19,43 @@ function CalculationBMI(booleanValue, heightMetric, heightImperial, weightMetric
     }
 }
 
+function YourType(gender, hasil)
+{
+    if (hasil < 16)
+    {
+        return "severely underweight";
+    }
+    else if(hasil > 16 && hasil < 18.6)
+    {
+        return "underweight";
+    }
+    else if(gender == "Male" && hasil > 18.5 && hasil <= 25)
+    {
+        return "healthy";
+    }
+    else if(gender == "Female" && hasil > 18.5 && hasil <= 24)
+    {
+        return "healthy";
+    }
+    else if(gender == "Male" && hasil > 25 && hasil <= 30)
+    {
+        return "overweight";
+    }
+    else if(gender == "Female" && hasil > 24 && hasil <= 29)
+    {
+        return "overweight";
+    }
+    else if(gender == "Male" && hasil > 30)
+    {
+        return "obese";
+    }
+    else if(gender == "Female" && hasil > 29)
+    {
+        return "obese";
+    }
+
+}
+
 function AppViewModel() {
     ko.validation.configure({
         messagesOnModified: true,
@@ -74,6 +111,8 @@ function AppViewModel() {
                 params: /^([0-9.])+$/i,
                 message: "Should be filled by number."
             }});
+    this.genders = ko.observableArray(['Male', 'Female']);
+    this.chosenGender = ko.observableArray(['Male']);
     
     calcHImp = ko.computed(function() {
         a = (this.heightMetric() * 0.393701).toFixed(2);
@@ -133,7 +172,7 @@ function AppViewModel() {
     },this);
 
     limitHeightImperial = ko.computed(function() {
-    minHeightI = 0.39;
+    minHeightI = 0.393701;
     maxHeightI = 200;
     if (this.heightImperial() < minHeightI)
     {
@@ -163,7 +202,8 @@ function AppViewModel() {
     this.fullName = ko.observable("");
     this.WN = ko.observable("");
     this.waterSuggestion = ko.observable("");
-    
+    this.WeightType = ko.observable("");
+
     this.hasil = ko.computed(function(){
         return CalculationBMI(this.booleanValue(), this.heightMetric(), this.heightImperial(), this.weightMetric(), this.weightImperial());
     },this);
@@ -175,11 +215,16 @@ function AppViewModel() {
     this.genName = ko.computed(function() {
     return "Hello, "+Capitalize(this.firstName()) + " " + Capitalize(this.lastName())+" !";}, this);
 
+    this.genType = ko.computed(function(){
+        return  YourType(this.chosenGender(), this.hasil());
+    },this);
+
     this.countBMI = function(){
         if(this.firstName.isValid() == true && this.firstName.isValid() == true && this.agePerson.isValid() == true && this.weightMetric.isValid() == true && this.weightImperial.isValid() == true && this.heightMetric.isValid() == true && this.heightImperial.isValid() == true)
         {
             this.resultBMI("Your BMI is "+this.hasil());
             this.fullName(this.genName());
+            this.WeightType(" and you are "+this.genType()+".");
             this.WN("You need "+this.waterNeeds()+" ounces of water a day. Or "+(this.waterNeeds()*0.029573).toFixed(2)+" litres a day.");
             this.waterSuggestion("You may drink 12 ounces or 355 ml of water more every 30 minutes workout.");
         }

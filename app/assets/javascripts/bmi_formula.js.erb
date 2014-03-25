@@ -1,13 +1,16 @@
+//Capitalize the fullName
 function Capitalize(string)
 {
     return string.charAt(0).toUpperCase() + string.slice(1).toLowerCase()
 }
 
+//Calculate water needs
 function WaterNeeds(weightImperial)
 {
     return (weightImperial*2/3).toFixed(2);
 }
 
+//Calculate BMI by type of measurement
 function CalculationBMI(booleanValue, heightMetric, heightImperial, weightMetric, weightImperial)
 {
     if (booleanValue == "Metric")
@@ -19,6 +22,7 @@ function CalculationBMI(booleanValue, heightMetric, heightImperial, weightMetric
     }
 }
 
+//Find person's type of BMI
 function YourType(gender, hasil)
 {
     if (hasil < 16)
@@ -57,6 +61,7 @@ function YourType(gender, hasil)
 }
 
 function AppViewModel() {
+    //VALIDATION - BEGIN
     ko.validation.configure({
         messagesOnModified: true,
         insertMessages: false,
@@ -70,7 +75,6 @@ function AppViewModel() {
             minLength: 2,
             maxLength: 25
           });
-
     this.lastName = ko.observable("").extend({ required: true, 
             pattern: {
                 params: /^([a-z ])+$/i,
@@ -78,15 +82,12 @@ function AppViewModel() {
             minLength: 1,
             maxLength: 25
           });
-
-    this.booleanValue = ko.observable('Metric');
     this.agePerson = ko.observable(20).extend({ number: true,
             required: true,
             pattern:{
                 params: /^([0-9])+$/i,
                 message: "Should be filled by number."
             }});
-
     this.weightMetric = ko.observable(0).extend({ number: true,
             required: true,
             pattern:{
@@ -111,26 +112,6 @@ function AppViewModel() {
                 params: /^([0-9.])+$/i,
                 message: "Should be filled by number."
             }});
-    this.genders = ko.observableArray(['Male', 'Female']);
-    this.chosenGender = ko.observableArray(['Male']);
-    
-    calcHImp = ko.computed(function() {
-        a = (this.heightMetric() * 0.393701).toFixed(2);
-        return this.heightImperial(a);
-    },this);
-    calcHMet =  ko.computed(function() {
-        a = (this.heightImperial() * 2.54).toFixed(2);
-        return this.heightMetric(a);
-    },this);
-    calcMImp = ko.computed(function() {
-        a = (this.weightMetric() * 2.20462).toFixed(2);
-        return this.weightImperial(a);
-    },this);
-    calcMMet =  ko.computed(function() {
-        a = (this.weightImperial() * 0.453592).toFixed(2);
-        return this.weightMetric(a);
-    },this);
-    
     // BEGIN - Metric Limiter
     limitWeightMetric = ko.computed(function() {
     minWeightM = 1;
@@ -197,12 +178,34 @@ function AppViewModel() {
     }
     },this);
     //END - Age limiter
-
+    //VALIDATION - END
+    
+    this.booleanValue = ko.observable('Metric');
     this.resultBMI = ko.observable("");
     this.fullName = ko.observable("");
     this.WN = ko.observable("");
     this.waterSuggestion = ko.observable("");
     this.WeightType = ko.observable("");
+    this.genders = ko.observableArray(['Male', 'Female']);
+    this.chosenGender = ko.observableArray(['Male']);
+    
+    //Automated conversion of weight and height
+    calcHImp = ko.computed(function() {
+        a = (this.heightMetric() * 0.393701).toFixed(2);
+        return this.heightImperial(a);
+    },this);
+    calcHMet =  ko.computed(function() {
+        a = (this.heightImperial() * 2.54).toFixed(2);
+        return this.heightMetric(a);
+    },this);
+    calcMImp = ko.computed(function() {
+        a = (this.weightMetric() * 2.20462).toFixed(2);
+        return this.weightImperial(a);
+    },this);
+    calcMMet =  ko.computed(function() {
+        a = (this.weightImperial() * 0.453592).toFixed(2);
+        return this.weightMetric(a);
+    },this);
 
     this.hasil = ko.computed(function(){
         return CalculationBMI(this.booleanValue(), this.heightMetric(), this.heightImperial(), this.weightMetric(), this.weightImperial());

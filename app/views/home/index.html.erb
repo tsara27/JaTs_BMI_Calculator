@@ -119,6 +119,9 @@
     <br><h2><span data-bind='text: fullName'></span></h2> 
     <br><h3><span data-bind='text: resultBMI'></span><span data-bind="text: WeightType"></span>
 </h3>  
+    <div data-bind="foreach: Suggestion">
+      <p data-bind="text:$data"></p>
+    </div>
     <br><h3><span data-bind='text: WN'></span></h3>
     <br><p data-bind='text: waterSuggestion'></p>    
 </div>

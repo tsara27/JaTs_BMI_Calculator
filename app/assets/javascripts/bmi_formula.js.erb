@@ -221,11 +221,53 @@ function AppViewModel() {
     this.genType = ko.computed(function(){
         return  YourType(this.chosenGender(), this.hasil());
     },this);
-
+    this.Suggestion = ko.observableArray([]);
+    this.genSugg = ko.computed(function(){
+        if (this.genType() == "underweight")
+        {
+            return ["If you're underweight, aim to gain weight gradually until you're a weight that is healthy for your height and age.",
+                    "It’s crucial that you gain weight the right way, and not by eating chocolate, cakes and other high-calorie junk foods full of saturated fat and sugar, or with fizzy drinks. These foods can increase your body fat instead of your lean body mass."];
+        }
+        else if (this.genType() == "severely underweight")
+        {
+            return ["Firstly, eliminate all the causes of underweight. Make sure that you do not suffer from underlying illnesses that cause weight loss or hamper weight gain and that other important factors such as medications, depression, or anxiety are not preventing you from gaining weight.",
+                    "If you have a clean bill of physical and mental health, the solution to underweight is to ingest more energy on a daily basis than you use up for physiological processes and physical activity.",
+                    "This means that you must eat more at each meal and have healthy snacks between meals. If necessary, take a meal supplement .",
+                    "It is important to note that if you suspect that you may tend towards an eating disorder, please get help fast. Consult a clinical psychologist and a dietician to help you uncover what is driving you to starve your body and to work out a diet that will help you to gain weight without threat."];
+        }
+        else if (this.genType() == "healthy")
+        {
+            return ["Reaching and maintaining a healthy weight is important for overall health and can help you prevent and control many diseases and conditions. If you are overweight or obese, you are at higher risk of developing serious health problems, including heart disease, high blood pressure, type 2 diabetes, gallstones, breathing problems, and certain cancers. That is why maintaining a healthy weight is so important: It helps you lower your risk for developing these problems, helps you feel good about yourself, and gives you more energy to enjoy life.",
+                    "There are some tips regarding to maintain your healthy weight.",
+                    "Maintain your healthier eating habits regardless of changes in your routine, such as eating out, weekends or holidays. By planning ahead, you're less likely to slip up.",
+                    "Research shows that breakfast can help people control their weight. Having breakfast can help you avoid getting too hungry and snacking later on.",
+                    "Build up your physical activity levels – if you've already been walking regularly, think about walking for longer, or start running.",
+                    "Weigh yourself regularly so you can keep a close eye on any changes to your weight.",
+                    "Variety is the spice of life, so if you feel yourself slipping back into old ways, mix things up a bit. Buy a new healthy cookbook, sign up for a healthy cooking course or try a new activity."];
+        }
+        else if (this.genType() == "overweight")
+        {
+            return ["You can safely lose 3 or more pounds a week at home with a healthy diet and lots of exercise, says weight loss counselor Katherine Tallmadge, RD.",
+                    "If you burn 500 more calories than you eat every day for a week, you should lose about 1-2 pounds.",
+                    "If you want to lose weight faster, you'll need to eat less and exercise more.",
+                    "For instance, if you take in 1,050 to 1,200 calories a day, and exercise for one hour per day, you could lose 3-5 pounds in the first week, or more if you weigh more than 250 pounds. It's very important not to cut calories any further -- that's dangerous.",
+                    "Limiting salt and starches may also mean losing more weight at first -- but that's mostly fluids, not fat."];
+        }
+        else if (this.genType() == "obese")
+        {
+            return ["You can safely lose 3 or more pounds a week at home with a healthy diet and lots of exercise, says weight loss counselor Katherine Tallmadge, RD.",
+                    "If you burn 500 more calories than you eat every day for a week, you should lose about 1-2 pounds.",
+                    "If you want to lose weight faster, you'll need to eat less and exercise more.",
+                    "You should not take heavy exercise. You can walk around 30-60 minutes. You may start to jog when you are overweight.",
+                    "For instance, if you take in 1,050 to 1,200 calories a day, and exercise for one hour per day, you could lose 3-5 pounds in the first week, or more if you weigh more than 250 pounds. It's very important not to cut calories any further -- that's dangerous.",
+                    "Limiting salt and starches may also mean losing more weight at first -- but that's mostly fluids, not fat."];
+        }
+    },this);
     this.countBMI = function(){
         if(this.firstName.isValid() == true && this.firstName.isValid() == true && this.agePerson.isValid() == true && this.weightMetric.isValid() == true && this.weightImperial.isValid() == true && this.heightMetric.isValid() == true && this.heightImperial.isValid() == true)
         {
             this.resultBMI("Your BMI is "+this.hasil());
+            this.Suggestion(this.genSugg());
             this.fullName(this.genName());
             this.WeightType(" and you are "+this.genType()+".");
             this.WN("You need "+this.waterNeeds()+" ounces of water a day. Or "+(this.waterNeeds()*0.029573).toFixed(2)+" litres a day.");

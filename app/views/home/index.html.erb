@@ -6,7 +6,7 @@
 <p>The body mass index, or BMI, is a calculation used to determine your level of body fat. It can help a doctor determine your overall fitness and your risk of developing chronic diseases.</p>
 
 <div class='form_input'>
-<form class="form-horizontal" role="form" action="#">
+<%= form_tag({action: "print"}, class: "form-horizontal",method: "get",role: "form") do %>
   
   <!-- First name -->
   <div class="form-group">
@@ -65,7 +65,7 @@
     <label for="weight_input" class="col-sm-2 control-label">Your Weight:</label>
     <div class="col-sm-6">
       <div class="input-group">
-        <input type="number" class="form-control numeric" name="weight_input"data-bind="value: weightMetric, attr: { min: minWeightM, max: maxWeightM }"/>
+        <input type="text" class="form-control numeric" name="weight_input"data-bind="value: weightMetric, attr: { min: minWeightM, max: maxWeightM }"/>
         <span class="input-group-addon">Kilograms</span>
       </div>
     </div>
@@ -77,7 +77,7 @@
     <label for="height_input" class="col-sm-2 control-label">Your Height:</label>
     <div class="col-sm-6">
       <div class="input-group">
-        <input type="number" class="form-control numeric" name="height_input" min="1" max="250" step="0.1"data-bind="value: heightMetric, attr: { min: minHeightM, max: maxHeightM }"/>
+        <input type="text" class="form-control numeric" name="height_input" min="1" max="250" step="0.1"data-bind="value: heightMetric, attr: { min: minHeightM, max: maxHeightM }"/>
         <span class="input-group-addon">Centimeters</span>
       </div>
     </div>
@@ -90,7 +90,7 @@
     <label for="weight_input" class="col-sm-2 control-label">Your Weight:</label>
     <div class="col-sm-6">
       <div class="input-group">
-        <input type="number" class="form-control numeric" name="weight_input"data-bind="value: weightImperial, attr: { min: minWeightI, max: maxWeightI }"/>
+        <input type="text" class="form-control numeric" name="weight_input"data-bind="value: weightImperial, attr: { min: minWeightI, max: maxWeightI }"/>
         <span class="input-group-addon">Lbs</span>
       </div>
     </div>
@@ -102,20 +102,28 @@
     <label for="height_input" class="col-sm-2 control-label">Your Height:</label>
     <div class="col-sm-6">
         <div class="input-group">
-          <input type="number" class="form-control numeric" name="height_input" min="1" max="250" step="0.1"data-bind="value: heightImperial, attr: { min: minHeightI, max: maxHeightI }"/>
+          <input type="text" class="form-control numeric" name="height_input" min="1" max="250" step="0.1"data-bind="value: heightImperial, attr: { min: minHeightI, max: maxHeightI }"/>
           <span class="input-group-addon">Inches</span>
       </div>
     </div>
      <div class="col-sm-4" data-bind="validationMessage: heightImperial"></div>
   </div>
-</form>
-
-  <!--  Submit button -->
   <div class="form-group">
-    <div class="col-sm-offset-2 col-sm-6">
+<div class="col-sm-offset-2 col-sm-2">
       <button class="btn btn-embossed btn-primary" data-toggle="tooltip" data-placement="top" title="Prepare yourself" data-bind="click: countBMI">Show My BMI!</button>
     </div>
+    <div class="col-sm-6" data-bind="html: printBtn">
+    </div>
   </div>
+  <!-- Hidden form -->
+  <input name="fullname" type="hidden" data-bind="value: fullName" />
+  <input name="bmi" type="hidden" data-bind="value: resultBMI" />
+  <input name="typeweight" type="hidden" data-bind="value: WeightType" />
+  <input name="type" type="hidden" data-bind="value: genType" />
+  <input name="suggestion" type="hidden" data-bind="value: genSugg" />
+  <input name="wn" type="hidden" data-bind="value: WN" />
+
+<% end %>
     <br><h2><span data-bind='text: fullName'></span></h2> 
     <br><h3><span data-bind='text: resultBMI'></span><span data-bind="text: WeightType"></span>
 </h3>  
@@ -127,4 +135,4 @@
 </div>
 
 <!-- Javascript additional -->
-<%= javascript_include_tag "bmi_formula", "data-turbolinks-track" => true %>
+<%= wicked_pdf_javascript_include_tag "bmi_formula", "data-turbolinks-track" => true %>

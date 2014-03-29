@@ -184,6 +184,7 @@ function AppViewModel() {
     this.resultBMI = ko.observable("");
     this.fullName = ko.observable("");
     this.WN = ko.observable("");
+    this.printBtn = ko.observable("");
     this.waterSuggestion = ko.observable("");
     this.WeightType = ko.observable("");
     this.genders = ko.observableArray(['Male', 'Female']);
@@ -191,19 +192,19 @@ function AppViewModel() {
     
     //Automated conversion of weight and height
     calcHImp = ko.computed(function() {
-        a = (this.heightMetric() * 0.393701).toFixed(2);
+        a = (this.heightMetric() * 0.393701).toFixed(1);
         return this.heightImperial(a);
     },this);
     calcHMet =  ko.computed(function() {
-        a = (this.heightImperial() * 2.54).toFixed(2);
+        a = (this.heightImperial() * 2.54).toFixed(1);
         return this.heightMetric(a);
     },this);
     calcMImp = ko.computed(function() {
-        a = (this.weightMetric() * 2.20462).toFixed(2);
+        a = (this.weightMetric() * 2.20462).toFixed(1);
         return this.weightImperial(a);
     },this);
     calcMMet =  ko.computed(function() {
-        a = (this.weightImperial() * 0.453592).toFixed(2);
+        a = (this.weightImperial() * 0.453592).toFixed(1);
         return this.weightMetric(a);
     },this);
 
@@ -216,7 +217,7 @@ function AppViewModel() {
     },this);
 
     this.genName = ko.computed(function() {
-    return "Hello, "+Capitalize(this.firstName()) + " " + Capitalize(this.lastName())+" !";}, this);
+    return "Hello, "+Capitalize(this.firstName()) + " " + Capitalize(this.lastName())+"!";}, this);
 
     this.genType = ko.computed(function(){
         return  YourType(this.chosenGender(), this.hasil());
@@ -272,6 +273,7 @@ function AppViewModel() {
             this.WeightType(" and you are "+this.genType()+".");
             this.WN("You need "+this.waterNeeds()+" ounces of water a day. Or "+(this.waterNeeds()*0.029573).toFixed(2)+" litres a day.");
             this.waterSuggestion("You may drink 12 ounces or 355 ml of water more every 30 minutes workout.");
+            this.printBtn("<button type='submit' class='btn btn-embossed btn-primary' data-toggle='tooltip' data-placement='top' title='Print the result'>Save the result</button>");
         }
         else
         {

@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>BMI Calculator</title>
+  <%= wicked_pdf_stylesheet_link_tag "print" -%>
+</head>
+<body>
+	<div class="container">
+		<div class="page-header">
+		  <h1><%= @fullname %><small> <%= @bmi %><%= @typeweight %></small></h1>
+		</div>
+		<hr>
+		<div class="jumbotron">
+		  	<h2>What is BMI?</h2>
+			<p>The body mass index (BMI), or Quetelet index, is a measure for human body shape based on an individual's mass and height.</p>
+			<p>The BMI is used in a wide variety of contexts as a simple method to assess how much an individual's body weight departs from what is normal or desirable for a person of his or her height.</p>
+			<h2>Why BMI is important?</h2>
+			<p>The body mass index, or BMI, is a calculation used to determine your level of body fat. It can help a doctor determine your overall fitness and your risk of developing chronic diseases.</p>
+		</div>
+		<hr>
+		<div class="page-header">
+		  <h1>Suggestion for your type weight <small> (<%= @type %>)</small></h1>
+		</div>
+		<hr>
+		<%= raw "<p>"+@suggestion.split('.,').join(".</p><p>") %>
+		<hr>
+		<div class="page-header">
+		  <h1>Pay Attention! <small>(Your water needs for your health)</small></h1>
+		</div>
+		<hr>
+		<p><%= @wn %></p>
+		<p>You may drink 12 ounces or 355 ml of water more every 30 minutes workout.</p>
+	</div>
+</body>
+</html>

@@ -28,6 +28,8 @@ gem 'turbolinks'
 gem 'jbuilder', '~> 1.2'
  
 gem 'knockoutjs-rails'
+gem 'wkhtmltopdf-binary'
+gem 'wicked_pdf'
 
 group :doc do
   # bundle exec rake doc:rails generates the API under doc/api.

@@ -2,7 +2,7 @@ source 'https://rubygems.org'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.0.3'
-
+gem 'sqlite3'
 
 # Use SCSS for stylesheets
 gem 'sass-rails', '>= 3.2' # sass-rails needs to be higher than 3.2
